@@ -5,10 +5,8 @@ export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  profileImage: string;
-  likesInComments: number;
-  likesInPosts: number;
-  likesInProjects: number;
+  isVerified:boolean
+ 
 }
 
 // Define the User schema
@@ -17,10 +15,8 @@ const UserSchema: Schema = new Schema(
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    profileImage: { type: String, default: '' },
-    likesInComments: { type: Number, default: 0 },
-    likesInPosts: { type: Number, default: 0 },
-    likesInProjects: { type: Number, default: 0 },
+    isVerified:{type:Boolean,default:false}
+    
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
