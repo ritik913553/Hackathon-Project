@@ -4,6 +4,7 @@ import TopNav from '../components/TopNav';
 import PostSection from '../components/PostSection';
 import FindGroups from './FindGroups';
 import MentorSearch from './MentorSearch';
+import BecomeMentor from './BecomeMentor';
 
 export default function Dashboard() {
   const [activeView, setActiveView] = useState('posts');
@@ -15,7 +16,7 @@ export default function Dashboard() {
       case 'findMentors':
         return <div><MentorSearch/></div>;
       case 'becomeMentor':
-        return <div>Become Mentor Content</div>;
+        return <div><BecomeMentor/></div>;
       case 'findProject':
         return <div>Find Project Content</div>;
       default:
