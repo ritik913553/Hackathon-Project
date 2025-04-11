@@ -15,12 +15,6 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
       
       <nav className="space-y-2">
         <ActionButton 
-          active={activeView === 'posts'}
-          onClick={() => setActiveView('posts')}
-          icon="📝"
-          label="Posts"
-        />
-        <ActionButton 
           active={activeView === 'myGroups'}
           onClick={() => setActiveView('myGroups')}
           icon="👥"

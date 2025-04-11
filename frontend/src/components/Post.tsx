@@ -1,20 +1,39 @@
 // Post.tsx
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+import TopNav from "../components/TopNav";
+import PostSection from "../components/PostSection";
+import FindGroups from "../pages/FindGroups";
+import MentorSearch from "../pages/MentorSearch";
+import BecomeMentor from "../pages/BecomeMentor";
+import CreatePost from "../components/CreatePost";
 
 const Post = () => {
   const navigate = useNavigate();
+  const [activeView, setActiveView] = useState<string>(""); // empty string = show "Hello World"
 
+  const renderActiveView = () => {
+    switch (activeView) {
+      case "myGroups":
+        return <FindGroups />;
+      case "findMentors":
+        return <MentorSearch />;
+      case "becomeMentor":
+        return <BecomeMentor />;
+      case "findProject":
+        return <div>Find Project Content</div>;
+      default:
+        return <CreatePost />;
+    }
+  };
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* Sidebar */}
-      <div className="w-16 md:w-64 bg-gray-900 text-white fixed h-full p-4">
-        {/* Sidebar content (unchanged) */}
-        <div className="space-y-4">
-          <button className="block w-full text-left hover:bg-gray-700 p-2 rounded">Dashboard</button>
-          <button className="block w-full text-left hover:bg-gray-700 p-2 rounded">Explore</button>
-        </div>
-      </div>
+
+      {/* Fixed Sidebar */}
+            <div className="fixed top-16 left-0 bottom-0 w-64 z-40 bg-white shadow">
+              <Sidebar activeView={activeView} setActiveView={setActiveView} />
+            </div>
 
       {/* Main content with Top Navbar */}
       <div className="flex-1 flex flex-col ml-16 md:ml-64">
@@ -53,6 +72,7 @@ const Post = () => {
             ))}
           </div>
         </div>
+        
       </div>
 
       {/* Right Sidebar */}
@@ -67,6 +87,7 @@ const Post = () => {
           <button className="w-full bg-green-500 text-white p-2 rounded">Find Mentors</button>
         </div>
       </div>
+
     </div>
   );
 };

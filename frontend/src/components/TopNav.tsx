@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function TopNav() {
+  const navigate = useNavigate();
   return (
     <header className="bg-white shadow-sm">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -11,11 +12,12 @@ export default function TopNav() {
             </svg>
           </button>
         </div>
-        
+
         <div className="hidden md:block"></div>
-        
+
         <nav>
           <ul className="flex space-x-6 items-center">
+            {/* Home Button */}
             <li>
               <Link to="/dashboard" className="text-gray-700 hover:text-blue-600">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,6 +25,20 @@ export default function TopNav() {
                 </svg>
               </Link>
             </li>
+
+            {/* Post Button */}
+            <li>
+              <button
+                onClick={() => navigate('/post')} // you can change the route if needed
+                className="text-gray-700 hover:text-blue-600"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+            </li>
+
+            {/* Notifications */}
             <li>
               <button className="text-gray-700 hover:text-blue-600 relative">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -31,12 +47,11 @@ export default function TopNav() {
                 <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
               </button>
             </li>
+
+            {/* Profile Button */}
             <li>
-              <button className="flex items-center space-x-1">
-                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-semibold">
-                  U
-                </div>
-                <span className="hidden md:inline text-gray-700">User</span>
+              <button onClick={() => navigate("/profile")} className="rounded-full border p-2 hover:bg-gray-200">
+                👤
               </button>
             </li>
           </ul>
