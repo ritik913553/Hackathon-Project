@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 export default function TopNav() {
   const navigate = useNavigate();
   return (
-    <header className="bg-white shadow-sm">
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <header className="bg-white shadow-sm ">
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center ">
         <div className="md:hidden">
           <button className="text-gray-600">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

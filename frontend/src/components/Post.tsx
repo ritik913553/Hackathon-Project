@@ -1,4 +1,3 @@
-// Post.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
@@ -11,7 +10,7 @@ import CreatePost from "../components/CreatePost";
 
 const Post = () => {
   const navigate = useNavigate();
-  const [activeView, setActiveView] = useState<string>(""); // empty string = show "Hello World"
+  const [activeView, setActiveView] = useState<string>("");
 
   const renderActiveView = () => {
     switch (activeView) {
@@ -27,36 +26,34 @@ const Post = () => {
         return <CreatePost />;
     }
   };
+
   return (
     <div className="flex h-screen overflow-hidden">
-
       {/* Fixed Sidebar */}
-            <div className="fixed top-16 left-0 bottom-0 w-64 z-40 bg-white shadow">
-              <Sidebar activeView={activeView} setActiveView={setActiveView} />
-            </div>
+      <div className="w-64 h-screen">
+        <Sidebar activeView={activeView} setActiveView={setActiveView} />
+      </div>
 
-      {/* Main content with Top Navbar */}
-      <div className="flex-1 flex flex-col ml-16 md:ml-64">
+      {/* Main content */}
+      <div className="flex-1 flex flex-col">
         {/* Top Navbar */}
-        <div className="h-16 bg-white shadow-md fixed top-0 left-16 md:left-64 right-0 z-10 flex items-center justify-between px-6">
-          <div className="font-bold text-xl">Home</div>
-          <div className="flex space-x-4 items-center">
-            <button>🔔</button>
-            <button onClick={() => navigate("/profile")} className="rounded-full border p-2 hover:bg-gray-200">
-              👤
-            </button>
-          </div>
+        <div className="h-16">
+          <TopNav />
         </div>
 
         {/* Scrollable Post Area */}
-        <div className="mt-16 p-4 overflow-y-auto flex-1 bg-gray-100">
+        <div className="mt-2 p-4 overflow-y-auto flex-1 bg-gray-100">
           {/* Create Post Section */}
           <div className="bg-white p-4 rounded shadow mb-6">
             <p className="font-semibold mb-2">Create Post</p>
-            <textarea className="w-full border rounded p-2" rows={3} placeholder="What's on your mind?" />
+            <textarea
+              className="w-full border rounded p-2"
+              rows={3}
+              placeholder="What's on your mind?"
+            />
           </div>
 
-          {/* Posts Feed */}
+          {/* Posts Feed */}``
           <div className="space-y-4">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="bg-white p-4 rounded shadow">
@@ -72,7 +69,6 @@ const Post = () => {
             ))}
           </div>
         </div>
-        
       </div>
 
       {/* Right Sidebar */}
@@ -83,11 +79,14 @@ const Post = () => {
           className="w-full border px-4 py-2 rounded mb-4"
         />
         <div className="space-y-2">
-          <button className="w-full bg-blue-500 text-white p-2 rounded">Find Groups</button>
-          <button className="w-full bg-green-500 text-white p-2 rounded">Find Mentors</button>
+          <button className="w-full bg-blue-500 text-white p-2 rounded">
+            Find Groups
+          </button>
+          <button className="w-full bg-green-500 text-white p-2 rounded">
+            Find Mentors
+          </button>
         </div>
       </div>
-
     </div>
   );
 };

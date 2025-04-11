@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
-import PostSection from '../components/PostSection';
 import FindGroups from './FindGroups';
 import MentorSearch from './MentorSearch';
 import BecomeMentor from './BecomeMentor';
 import CreatePost from '../components/CreatePost';
 
 export default function Dashboard() {
-  const [activeView, setActiveView] = useState<string>(''); // empty string = show "Hello World"
+  const [activeView, setActiveView] = useState<string>(''); // empty string = show "CreatePost"
 
   const renderActiveView = () => {
     switch (activeView) {
@@ -21,26 +20,26 @@ export default function Dashboard() {
       case 'findProject':
         return <div>Find Project Content</div>;
       default:
-        return <CreatePost/>;
+        return <CreatePost />;
     }
   };
 
   return (
-    <div className="h-screen overflow-hidden">
-      {/* Fixed Top Navbar */}
-      <div className="fixed top-0 left-0 right-0 z-50">
-        <TopNav />
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <div className="w-64 h-screen">
+        <Sidebar activeView={activeView} setActiveView={setActiveView} />
       </div>
 
-      {/* Main Content Section */}
-      <div className="flex pt-16 h-full">
-        {/* Fixed Sidebar */}
-        <div className="fixed top-16 left-0 bottom-0 w-64 z-40 bg-white shadow">
-          <Sidebar activeView={activeView} setActiveView={setActiveView} />
+      {/* Main Section */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* TopNav */}
+        <div className="h-16">
+          <TopNav />
         </div>
 
-        {/* Scrollable Main Section */}
-        <main className="ml-64 flex-1 overflow-y-auto p-4 bg-gray-100 h-[calc(100vh-4rem)]">
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto bg-gray-100 p-4">
           {renderActiveView()}
         </main>
       </div>

@@ -52,6 +52,7 @@ const GroupSearch: React.FC = () => {
             </div>
           ))}
         </div>
+        
       </div>
     </div>
   );

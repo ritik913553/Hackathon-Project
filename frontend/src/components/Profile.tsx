@@ -1,8 +1,6 @@
-// Profile.tsx
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import TopNav from "../components/TopNav";
-import PostSection from "../components/PostSection";
 import FindGroups from "../pages/FindGroups";
 import MentorSearch from "../pages/MentorSearch";
 import BecomeMentor from "../pages/BecomeMentor";
@@ -18,7 +16,8 @@ const Profile: React.FC = () => {
       setInput("");
     }
   };
-  const [activeView, setActiveView] = useState<string>(""); // empty string = show "Hello World"
+
+  const [activeView, setActiveView] = useState<string>("");
 
   const renderActiveView = () => {
     switch (activeView) {
@@ -37,27 +36,20 @@ const Profile: React.FC = () => {
 
   return (
     <div className="flex h-screen overflow-hidden">
-
-      {/* Fixed Sidebar */}
-      <div className="fixed top-16 left-0 bottom-0 w-64 z-40 bg-white shadow">
+      {/* Sidebar */}
+      <div className="w-64 h-screen">
         <Sidebar activeView={activeView} setActiveView={setActiveView} />
       </div>
 
-      {/* Main content with fixed Navbar */}
-      <div className="flex-1 flex flex-col ml-16 md:ml-64">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col overflow-hidden">
         {/* Top Navbar */}
-        <div className="h-16 bg-white shadow-md fixed top-0 left-16 md:left-64 right-0 z-10 flex items-center justify-between px-6">
-          <div className="font-bold text-xl">Profile</div>
-          <div className="flex space-x-4 items-center">
-            <button>🔔</button>
-            <button className="rounded-full border p-2 hover:bg-gray-200">
-              👤
-            </button>
-          </div>
+        <div className="h-16">
+          <TopNav />
         </div>
 
-        {/* Profile Scrollable Content */}
-        <div className="mt-16 p-4 overflow-y-auto flex-1 bg-gray-100">
+        {/* Main Scrollable Section */}
+        <div className="flex-1 overflow-y-auto bg-gray-100 p-4">
           <div className="max-w-6xl mx-auto space-y-6">
             {/* Banner + Profile Info */}
             <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -77,12 +69,10 @@ const Profile: React.FC = () => {
                 </p>
                 <div className="mt-4 flex flex-col gap-2 text-sm sm:text-base">
                   <p>
-                    <span className="font-semibold">Projects:</span> 5+
-                    completed
+                    <span className="font-semibold">Projects:</span> 5+ completed
                   </p>
                   <p>
-                    <span className="font-semibold">Experience:</span> 1+ years
-                    frontend development
+                    <span className="font-semibold">Experience:</span> 1+ years frontend development
                   </p>
                 </div>
               </div>
@@ -120,6 +110,7 @@ const Profile: React.FC = () => {
                 ))}
               </div>
             </div>
+            
           </div>
         </div>
       </div>
@@ -140,6 +131,7 @@ const Profile: React.FC = () => {
           </button>
         </div>
       </div>
+
     </div>
   );
 };

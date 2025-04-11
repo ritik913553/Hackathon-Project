@@ -16,7 +16,7 @@ const mentors: Mentor[] = Array.from({ length: 10 }, (_, i) => ({
 
 const MentorSearch: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 px-4 py-6 sm:px-6 lg:px-8 mt-10">
       <div className="max-w-4xl mx-auto">
         {/* Search Bar */}
         <div className="mb-6">
