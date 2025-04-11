@@ -4,7 +4,7 @@ export default function Header() {
   return (
     <header className="bg-blue-600 text-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <Link to="/" className="text-2xl font-bold">MentorConnect</Link>
+        <Link to="/" className="text-2xl font-bold">SkillSphere</Link>
         <nav>
           <ul className="flex space-x-6">
             <li><Link to="/login" className="hover:underline">Login</Link></li>

@@ -7,10 +7,12 @@ import MentorSearch from "../pages/MentorSearch";
 import BecomeMentor from "../pages/BecomeMentor";
 import CreatePost from "../components/CreatePost";
 import Rightbar from "./Rightbar";
+import FindProject from "../pages/FindProject";
+import ResourcesSection from "../pages/Resources";
 
 const Post = () => {
   const navigate = useNavigate();
-  const [activeView, setActiveView] = useState<string>("createPost"); // 👈 Default set to "createPost"
+  const [activeView, setActiveView] = useState<string>("createPost"); // 👈 Default view is CreatePost
 
   const renderActiveView = () => {
     switch (activeView) {
@@ -20,9 +22,10 @@ const Post = () => {
         return <MentorSearch />;
       case "becomeMentor":
         return <BecomeMentor />;
-      case "findProject":
-        return <div>Find Project Content</div>;
-      case "createPost":
+        case 'findProject':
+          return <FindProject/>;
+        case 'resources':
+          return <ResourcesSection/>;
       default:
         return <CreatePost />;
     }
@@ -30,7 +33,6 @@ const Post = () => {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      
       {/* Sidebar */}
       <div className="w-64 h-screen">
         <Sidebar activeView={activeView} setActiveView={setActiveView} />
@@ -47,43 +49,10 @@ const Post = () => {
         </main>
       </div>
 
-      {/* Right Sidebar with buttons to switch views */}
-      {/* <div className="hidden xl:block w-72 fixed right-0 top-16 bottom-0 p-4 bg-white shadow-md">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full border px-4 py-2 rounded mb-4"
-        />
-        <div className="space-y-2">
-          <button
-            className="w-full bg-blue-500 text-white p-2 rounded"
-            onClick={() => setActiveView("myGroups")}
-          >
-            Find Groups
-          </button>
-          <button
-            className="w-full bg-green-500 text-white p-2 rounded"
-            onClick={() => setActiveView("findMentors")}
-          >
-            Find Mentors
-          </button>
-          <button
-            className="w-full bg-gray-500 text-white p-2 rounded"
-            onClick={() => setActiveView("becomeMentor")}
-          >
-            Become a Mentor
-          </button>
-          <button
-            className="w-full bg-purple-500 text-white p-2 rounded"
-            onClick={() => setActiveView("createPost")} // 👈 Show CreatePost again
-          >
-            Create Post
-          </button>
-        </div>
-      </div> */}
-      
-      <Rightbar setActiveView={setActiveView} />
-
+      {/* Show Rightbar only when in CreatePost view */}
+      {activeView === "createPost" && (
+        <Rightbar setActiveView={setActiveView} />
+      )}
     </div>
   );
 };

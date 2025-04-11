@@ -69,7 +69,7 @@ const BecomeMentor: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-2xl ">
+      <div className="max-w-7xl w-auto">
         {/* Progress Indicator */}
         <div className="mb-12">
           <div className="flex items-center justify-center">

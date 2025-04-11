@@ -27,6 +27,8 @@ export default function Login() {
             console.error("Login failed:", err.response?.data || err.message);
             setError(err.response?.data?.message || "Login failed. Please try again.");
         }
+        // No backend, just redirect to dashboard
+        navigate('/dashboard');
     };
 
     return (

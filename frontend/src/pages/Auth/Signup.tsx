@@ -1,9 +1,7 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { useState } from "react";
-import { signup } from "../../http";
 import { useNavigate } from "react-router-dom";
-
 
 export default function Signup() {
     const [name, setName] = useState('');
@@ -11,9 +9,10 @@ export default function Signup() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
-    
-  const navigate = useNavigate()
-    const submit = async (e: React.FormEvent) => {
+
+    const navigate = useNavigate();
+
+    const submit = (e: React.FormEvent) => {
         e.preventDefault();
 
         // Validate fields
@@ -26,16 +25,9 @@ export default function Signup() {
             setError("Passwords do not match.");
             return;
         }
-        console.log(name,email,password,confirmPassword)
-        try {
-            const response = await signup({ name, email, password ,confirmPassword});
-            console.log("Signup successful:", response.data);
-            navigate('/login');
 
-        } catch (err: any) {
-            console.error("Signup failed:", err.response?.data || err.message);
-            setError(err.response?.data?.message || "Signup failed. Please try again.");
-        }
+        // No backend, just redirect to dashboard
+        navigate('/dashboard');
     };
 
     return (
@@ -53,10 +45,7 @@ export default function Signup() {
                             </div>
                         )}
                         <div className="mb-4">
-                            <label
-                                htmlFor="name"
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                            >
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                                 Name
                             </label>
                             <input
@@ -69,10 +58,7 @@ export default function Signup() {
                             />
                         </div>
                         <div className="mb-4">
-                            <label
-                                htmlFor="email"
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                            >
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                                 Email
                             </label>
                             <input
@@ -85,10 +71,7 @@ export default function Signup() {
                             />
                         </div>
                         <div className="mb-4">
-                            <label
-                                htmlFor="password"
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                            >
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
                                 Password
                             </label>
                             <input
@@ -101,10 +84,7 @@ export default function Signup() {
                             />
                         </div>
                         <div className="mb-6">
-                            <label
-                                htmlFor="confirmPassword"
-                                className="block text-sm font-medium text-gray-700 mb-1"
-                            >
+                            <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
                                 Confirm your Password
                             </label>
                             <input
@@ -126,10 +106,7 @@ export default function Signup() {
                     <div className="mt-4 text-center">
                         <p className="text-sm text-gray-600">
                             Already have an account?{" "}
-                            <a
-                                href="/login"
-                                className="text-blue-600 hover:underline"
-                            >
+                            <a href="/login" className="text-blue-600 hover:underline">
                                 Login
                             </a>
                         </p>

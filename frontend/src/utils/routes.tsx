@@ -6,6 +6,7 @@ import Dashboard from "../pages/Dashboard";
 import Post from "../components/Post";
 import Profile from "../components/Profile";
 
+
 const routes: RouteObject[] = [
   { path: "/", element: <LandingPage /> },
   { path: "/login", element: <Login /> },
@@ -13,6 +14,7 @@ const routes: RouteObject[] = [
   { path: "/dashboard", element: <Dashboard /> },
   { path: "/post", element: <Post/> },
   { path: "/profile", element: <Profile/> },
+
 ];
 
 export default routes;

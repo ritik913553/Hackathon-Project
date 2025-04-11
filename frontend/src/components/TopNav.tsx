@@ -26,7 +26,7 @@ export default function TopNav() {
               </Link>
             </li>
 
-            {/* Post Button */}
+            {/* Post Button
             <li>
               <button
                 onClick={() => navigate('/post')} // you can change the route if needed
@@ -36,7 +36,7 @@ export default function TopNav() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
                 </svg>
               </button>
-            </li>
+            </li> */}
 
             {/* Notifications */}
             <li>

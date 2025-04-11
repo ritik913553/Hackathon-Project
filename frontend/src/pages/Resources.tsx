@@ -22,63 +22,96 @@ const initialResources: Resource[] = [
     price: 9.99,
     rating: 4.8,
     author: 'JaneDoe',
-    image: 'https://source.unsplash.com/random/300x300/?notes,react',
+    image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg',
     downloads: 1245
   },
   {
     id: 2,
-    title: 'JavaScript Cheatsheet 2023',
-    type: 'cheatsheet',
-    description: 'All JS concepts summarized in one page with ES6+ features',
-    price: 4.99,
-    rating: 4.9,
+    title: 'Frontend Mentor Project Pack',
+    type: 'project',
+    description: 'Collection of frontend projects with source code and solutions',
+    price: 0.0,
+    rating: 4.5,
     author: 'CodeMaster',
-    image: 'https://source.unsplash.com/random/300x300/?cheatsheet,javascript',
-    downloads: 2873
+    image: 'https://images.pexels.com/photos/3182763/pexels-photo-3182763.jpeg',
+    downloads: 980
   },
   {
     id: 3,
-    title: 'E-commerce Template',
-    type: 'template',
-    description: 'Complete Next.js e-commerce template with Stripe integration',
-    price: 24.99,
-    rating: 4.7,
-    author: 'DevTemplates',
-    image: 'https://source.unsplash.com/random/300x300/?template,ecommerce',
-    downloads: 892
+    title: 'JavaScript Mastery Course',
+    type: 'cheatsheet',
+    description: 'In-depth video course on JavaScript from beginner to advanced level',
+    price: 49.99,
+    rating: 4.9,
+    author: 'DevGuru',
+    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    downloads: 3100
   },
   {
     id: 4,
-    title: 'Python Data Science Project',
-    type: 'project',
-    description: 'Complete data analysis project with Jupyter notebooks and dataset',
-    price: 14.99,
-    rating: 4.5,
-    author: 'DataWizard',
-    image: 'https://source.unsplash.com/random/300x300/?python,datascience',
-    downloads: 1567
+    title: 'HTML & CSS Crash Notes',
+    type: 'notes',
+    description: 'Quick reference notes for HTML5 and modern CSS3 techniques',
+    price: 5.0,
+    rating: 4.3,
+    author: 'StyleQueen',
+    image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg',
+    downloads: 750
   },
   {
     id: 5,
-    title: 'System Design Patterns',
-    type: 'notes',
-    description: 'Handwritten system design patterns with real-world examples',
-    price: 12.99,
-    rating: 4.9,
-    author: 'ArchitectPro',
-    image: 'https://source.unsplash.com/random/300x300/?system,design',
-    downloads: 2034
+    title: 'Portfolio Website Project',
+    type: 'project',
+    description: 'Personal portfolio website template built with HTML, CSS, and JS',
+    price: 0.0,
+    rating: 4.6,
+    author: 'WebWizard',
+    image: 'https://images.pexels.com/photos/3182763/pexels-photo-3182763.jpeg',
+    downloads: 1580
   },
   {
     id: 6,
-    title: 'CSS Grid Cheatsheet',
+    title: 'Responsive Design Course',
     type: 'cheatsheet',
-    description: 'Visual guide to CSS Grid with practical examples',
-    price: 3.99,
-    rating: 4.6,
-    author: 'StyleMaster',
-    image: 'https://source.unsplash.com/random/300x300/?css,grid',
-    downloads: 3421
+    description: 'Learn to build responsive websites that look great on all devices',
+    price: 29.99,
+    rating: 4.7,
+    author: 'DesignNinja',
+    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    downloads: 2140
+  },
+  {
+    id: 7,
+    title: 'Node.js Beginner Notes',
+    type: 'notes',
+    description: 'Easy-to-understand notes covering the basics of Node.js and backend development',
+    price: 7.5,
+    rating: 4.4,
+    author: 'BackendBro',
+    image: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg',
+    downloads: 630
+  },
+  {
+    id: 8,
+    title: 'API Integration Project Kit',
+    type: 'project',
+    description: 'Project resources and source code for integrating various public APIs',
+    price: 0.0,
+    rating: 4.5,
+    author: 'APIGenius',
+    image: 'https://images.pexels.com/photos/3182763/pexels-photo-3182763.jpeg',
+    downloads: 890
+  },
+  {
+    id: 9,
+    title: 'Full Stack Developer Course',
+    type: 'cheatsheet',
+    description: 'Become a full stack developer with this complete learning path',
+    price: 59.99,
+    rating: 4.9,
+    author: 'StackMaster',
+    image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg',
+    downloads: 4000
   }
 ];
 
@@ -93,15 +126,16 @@ const ResourcesSection: React.FC = () => {
   const [showForm, setShowForm] = useState(false);
 
   const handleAddResource = () => {
+    const newId = resources.length + 1;
     const resource: Resource = {
-      id: resources.length + 1,
+      id: newId,
       title: newResource.title,
-      type: newResource.type as any,
+      type: newResource.type as Resource['type'],
       description: newResource.description,
       price: newResource.price,
       rating: 4.5,
       author: 'You',
-      image: `https://source.unsplash.com/random/300x300/?${newResource.type},${newResource.title}`,
+      image: `https://source.unsplash.com/random/300x300/?${newResource.type},${newResource.title}&sig=${newId}`,
       downloads: 0
     };
     setResources([resource, ...resources]);
@@ -220,38 +254,23 @@ const ResourcesSection: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="p-5">
-                <div className="flex justify-between items-start mb-2">
-                  <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getTypeColor(resource.type)}`}>
-                    {resource.type.charAt(0).toUpperCase() + resource.type.slice(1)}
-                  </span>
-                  <div className="flex items-center">
-                    <svg className="w-4 h-4 text-yellow-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                    <span className="text-sm font-medium">{resource.rating}</span>
-                  </div>
+              <div className="p-4">
+                <span className={`inline-block text-xs px-2 py-1 rounded-full font-medium mb-2 ${getTypeColor(resource.type)}`}>
+                  {resource.type}
+                </span>
+                <h4 className="text-lg font-semibold text-gray-900">{resource.title}</h4>
+                <p className="text-sm text-gray-600 mt-1 mb-2">{resource.description}</p>
+                <div className="flex justify-between items-center text-sm text-gray-500">
+                  <span>By {resource.author}</span>
+                  <span>⭐ {resource.rating}</span>
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-1 line-clamp-1">{resource.title}</h3>
-                <p className="text-sm text-gray-500 mb-3 line-clamp-2">{resource.description}</p>
-                <div className="flex justify-between items-center">
-                  <div>
-                    <p className="text-2xl font-bold text-gray-900">${resource.price.toFixed(2)}</p>
-                    <p className="text-xs text-gray-500">{resource.downloads} downloads</p>
-                  </div>
-                  <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
-                    Buy Now
-                  </button>
+                <div className="mt-2 flex justify-between items-center text-sm">
+                  <span className="text-gray-700 font-medium">${resource.price.toFixed(2)}</span>
+                  <span className="text-gray-500">{resource.downloads} downloads</span>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-8 text-center">
-          <button className="px-6 py-3 border border-gray-300 rounded-lg text-indigo-600 hover:bg-gray-50 transition">
-            View All Resources
-          </button>
         </div>
       </div>
     </div>

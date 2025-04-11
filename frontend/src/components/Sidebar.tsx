@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import ActionButton from "./ActionButton";
+import { useNavigate } from "react-router-dom"; // 👈 import this
 
 interface SidebarProps {
   activeView: string;
@@ -7,10 +8,17 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
+  const navigate = useNavigate(); // 👈 use this hook
+
+  const handleLogout = () => {
+    // Clear local storage, tokens, etc. if needed
+    navigate("/"); // 👈 redirect to home
+  };
+
   return (
     <aside className="h-full w-full bg-white shadow-md p-4 hidden md:block bg-zinc-600 text-white">
       <div className="mb-10">
-        <h1 className="text-2xl font-bold text-blue-600 mt-2">MentorConnect</h1>
+        <h1 className="text-2xl font-bold text-blue-600 mt-2 ml-5">SkillSphere</h1>
       </div>
 
       <nav className="space-y-2  flex flex-col gap-5">
@@ -57,7 +65,7 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
 
         <ActionButton
           active={false}
-          onClick={() => console.log("Logout")}
+          onClick={handleLogout} // 👈 use this on logout
           icon="🚪"
           label="Logout"
         />
