@@ -5,6 +5,7 @@ import FindGroups from './FindGroups';
 import MentorSearch from './MentorSearch';
 import BecomeMentor from './BecomeMentor';
 import CreatePost from '../components/CreatePost';
+import FindProject from './FindProject';
 
 export default function Dashboard() {
   const [activeView, setActiveView] = useState<string>(''); // empty string = show "CreatePost"
@@ -18,7 +19,7 @@ export default function Dashboard() {
       case 'becomeMentor':
         return <BecomeMentor />;
       case 'findProject':
-        return <div>Find Project Content</div>;
+        return <FindProject/>;
       default:
         return <CreatePost />;
     }
