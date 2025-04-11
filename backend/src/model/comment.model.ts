@@ -12,7 +12,6 @@ export interface IComment extends Document {
 const CommentSchema: Schema = new Schema(
   {
     description: { type: String, required: true },
-    likes: { type: Number, default: 0 },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true }, // Reference to the User model
     postId: { type: Schema.Types.ObjectId, ref: 'Post', required: true }, // Reference to the Post model
   },

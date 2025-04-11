@@ -1,18 +1,34 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-const likeSchema = new Schema({
-    post:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Post"
+// Define the Like interface
+export interface ILike extends Document {
+    post?: mongoose.Schema.Types.ObjectId; // Reference to the Post model
+    comment?: mongoose.Schema.Types.ObjectId; // Reference to the Comment model
+    likedBy: mongoose.Schema.Types.ObjectId; // Reference to the User model
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+// Define the Like schema
+const likeSchema: Schema = new Schema(
+    {
+        post: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post",
+        },
+        comment: {
+            type: Schema.Types.ObjectId,
+            ref: "Comment",
+        },
+        likedBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
     },
-    comment:{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    },    
-    likedBy:{
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }
-},{timestamps:true})
+    { timestamps: true } // Automatically adds createdAt and updatedAt fields
+);
 
-export const Like = mongoose.model("Like",likeSchema);
+// Export the Like model
+const Like: Model<ILike> = mongoose.model<ILike>("Like", likeSchema);
+export default Like;

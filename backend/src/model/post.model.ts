@@ -1,6 +1,23 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-const postSchema = new Schema(
+// Define the Post interface
+export interface IPost extends Document {
+    userId: mongoose.Schema.Types.ObjectId;
+    title: string;
+    media: {
+        url: string;
+        type: "image" | "video";
+    }[];
+    postDescription: string;
+    tags: string[];
+    isMentorPost: boolean;
+    comments: mongoose.Schema.Types.ObjectId[];
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+// Define the Post schema
+const postSchema: Schema = new Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
@@ -44,8 +61,9 @@ const postSchema = new Schema(
             },
         ],
     },
-    { timestamps: true }
+    { timestamps: true } // Automatically adds createdAt and updatedAt fields
 );
 
- const Post = mongoose.model("Post", postSchema);
+// Export the Post model
+const Post: Model<IPost> = mongoose.model<IPost>("Post", postSchema);
 export default Post;
