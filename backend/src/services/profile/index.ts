@@ -1,6 +1,7 @@
 import { z } from "zod";
 import Profile from "../../model/profile.model";
 import { profileValidation } from "../../validations/user";
+import { getUserByEmail, getUserById } from "../user";
 
 // Get user profile by userId
 export const getUserProfile = async (userId: string) => {
@@ -17,6 +18,7 @@ export const getUserProfile = async (userId: string) => {
       data: profile,
     };
   } catch (error) {
+    console.error(error);
     return {
       success: false,
       message: "Internal server error",
@@ -24,12 +26,17 @@ export const getUserProfile = async (userId: string) => {
   }
 };
 
-export const createProfile = async (data: z.infer<typeof profileValidation>) => {
+export const updateUserProfile = async (
+  userId: string,
+  data: z.infer<typeof profileValidation>
+) => {
   try {
-    const profile = await Profile.create({
-        
-    })
+    const user = await getUserById(userId);
   } catch (error) {
-
+    console.error(error);
+    return {
+      success: false,
+      message: "Internal server error",
+    };
   }
 };

@@ -6,7 +6,29 @@ import { hashPass } from "../../lib";
 export const getUserByEmail = async (email: string) => {
   try {
     const user = await User.findOne({ email });
-    
+
+    if (!user) {
+      return {
+        success: false,
+        message: "User not found",
+      };
+    }
+    return {
+      success: true,
+      data: user,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "Internal server error",
+    };
+  }
+};
+
+export const getUserById = async (id: string) => {
+  try {
+    const user = await User.findById(id);
+
     if (!user) {
       return {
         success: false,
