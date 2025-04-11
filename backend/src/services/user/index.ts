@@ -1,7 +1,7 @@
 import User from "../../model/user.model";
-export const getUserByEmail = (email: string) => {
+export const getUserByEmail = async (email: string) => {
     try {
-        const user = User.findOne({ email });
+        const user = await User.findOne({ email });
         if (!user) {
             return {
                 success: false,
