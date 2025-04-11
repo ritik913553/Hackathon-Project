@@ -1,12 +1,12 @@
 import { RouteObject } from "react-router-dom";
-import About from "../components/About";
-import Login from "../components/Login";
-import Signin from "../components/Singin";
+import LandingPage from "../pages/LandingPage";
+import Login from "../pages/Auth/Login";
+import Signup from "../pages/Auth/Signup";
 
 const routes: RouteObject[] = [
-  { path: "/", element: <About /> },
+  { path: "/", element: <LandingPage /> },
   { path: "/login", element: <Login /> },
-  { path: "/signin", element: <Signin /> },
+  { path: "/signup", element: <Signup/> },
 ];
 
 export default routes;
