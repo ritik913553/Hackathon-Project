@@ -5,20 +5,31 @@ import FindGroups from "../pages/FindGroups";
 import MentorSearch from "../pages/MentorSearch";
 import BecomeMentor from "../pages/BecomeMentor";
 import CreatePost from "../components/CreatePost";
-import Rightbar from "./Rightbar";
 
 const Profile: React.FC = () => {
   const [skills, setSkills] = useState<string[]>([]);
+  const [experiences, setExperiences] = useState<string[]>([]);
   const [input, setInput] = useState("");
+  const [expInput, setExpInput] = useState("");
+  const [showSkillModal, setShowSkillModal] = useState(false);
+  const [showExpModal, setShowExpModal] = useState(false);
+  const [activeView, setActiveView] = useState<string>("");
 
   const handleAddSkill = () => {
     if (input.trim() && !skills.includes(input.trim())) {
       setSkills([...skills, input.trim()]);
       setInput("");
+      setShowSkillModal(false);
     }
   };
 
-  const [activeView, setActiveView] = useState<string>("");
+  const handleAddExperience = () => {
+    if (expInput.trim() && !experiences.includes(expInput.trim())) {
+      setExperiences([...experiences, expInput.trim()]);
+      setExpInput("");
+      setShowExpModal(false);
+    }
+  };
 
   const renderActiveView = () => {
     switch (activeView) {
@@ -28,10 +39,10 @@ const Profile: React.FC = () => {
         return <MentorSearch />;
       case "becomeMentor":
         return <BecomeMentor />;
-      case "findProject":
-        return <div>Find Project Content</div>;
-      default:
+      case "createPost":
         return <CreatePost />;
+      default:
+        return null;
     }
   };
 
@@ -43,15 +54,13 @@ const Profile: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Top Navbar */}
+      <div className="flex-1 flex flex-col overflow-hidden relative">
         <div className="h-16">
           <TopNav />
         </div>
 
-        <main className="flex-1 overflow-y-auto bg-gray-100 p-4">
+        <main className="flex-1 overflow-y-auto bg-gray-100 p-4 pr-[280px]"> {/* Leave space for fixed panel */}
           {activeView === "" ? (
-            // Show profile if no activeView selected
             <div className="max-w-6xl mx-auto space-y-6">
               {/* Banner + Profile Info */}
               <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -71,47 +80,27 @@ const Profile: React.FC = () => {
                   </p>
                   <div className="mt-4 flex flex-col gap-2 text-sm sm:text-base">
                     <p>
-                      <span className="font-semibold">Projects:</span> 5+
-                      completed
+                      <span className="font-semibold">Projects:</span> 5+ completed
                     </p>
                     <p>
-                      <span className="font-semibold">Experience:</span> 1+
-                      years frontend development
+                      <span className="font-semibold">Experience:</span> 1+ years frontend development
                     </p>
                   </div>
-                </div>
-              </div>
 
-              {/* Tech Skills Section */}
-              <div className="bg-white rounded-lg shadow-md p-4 sm:p-6">
-                <h3 className="text-md sm:text-lg font-semibold mb-4 text-gray-800">
-                  Tech Skills
-                </h3>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-4">
-                  <input
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleAddSkill()}
-                    placeholder="Add a skill..."
-                    className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                  <button
-                    onClick={handleAddSkill}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-                  >
-                    Add
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill, index) => (
-                    <span
-                      key={index}
-                      className="bg-blue-100 text-blue-800 px-4 py-1 rounded-lg text-sm font-medium"
+                  <div className="mt-4 flex gap-4">
+                    <button
+                      onClick={() => setShowSkillModal(true)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
                     >
-                      {skill}
-                    </span>
-                  ))}
+                      Add Skill
+                    </button>
+                    <button
+                      onClick={() => setShowExpModal(true)}
+                      className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                    >
+                      Add Experience
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -119,29 +108,112 @@ const Profile: React.FC = () => {
             renderActiveView()
           )}
         </main>
+
+        {/* Fixed Right Section */}
+        {activeView === "" && (
+          <div className="w-[260px] h-full bg-white border-l fixed right-0 top-16 overflow-hidden shadow-lg p-4">
+            <div>
+              <h3 className="text-lg font-semibold mb-2">Skills</h3>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {skills.map((skill, index) => (
+                  <span
+                    key={index}
+                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-lg text-sm font-medium flex items-center gap-2"
+                  >
+                    {skill}
+                    <button
+                      onClick={() => setSkills(skills.filter((_, i) => i !== index))}
+                      className="text-blue-500 hover:text-red-600"
+                      title="Remove skill"
+                    >
+                      ❌
+                    </button>
+                  </span>
+                ))}
+              </div>
+
+              <h3 className="text-lg font-semibold mb-2">Experience</h3>
+              <div className="flex flex-wrap gap-2">
+                {experiences.map((exp, index) => (
+                  <span
+                    key={index}
+                    className="bg-green-100 text-green-800 px-3 py-1 rounded-lg text-sm font-medium flex items-center gap-2"
+                  >
+                    {exp}
+                    <button
+                      onClick={() => setExperiences(experiences.filter((_, i) => i !== index))}
+                      className="text-green-500 hover:text-red-600"
+                      title="Remove experience"
+                    >
+                      ❌
+                    </button>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Right Sidebar */}
-      <div className="hidden xl:block w-72 fixed right-0 top-16 bottom-0 p-4 bg-white shadow-md">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-full border px-4 py-2 rounded mb-4"
-        />
-        <div className="space-y-2">
-          <button className="w-full bg-blue-500 text-white p-2 rounded">
-            Find Groups
-          </button>
-          <button className="w-full bg-green-500 text-white p-2 rounded">
-            Find Mentors
-          </button>
+      {/* Skill Modal */}
+      {showSkillModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-80 space-y-4">
+            <h3 className="text-lg font-semibold">Enter Skill</h3>
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className="w-full border px-3 py-2 rounded-md"
+              placeholder="e.g. React, Java"
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowSkillModal(false)}
+                className="px-3 py-1 border rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddSkill}
+                className="bg-blue-500 text-white px-4 py-1 rounded-md"
+              >
+                Add
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* <div>
-      <Rightbar/>
-      </div> */}
-      <Rightbar setActiveView={setActiveView} />
+      {/* Experience Modal */}
+      {showExpModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg p-6 w-80 space-y-4">
+            <h3 className="text-lg font-semibold">Enter Experience</h3>
+            <input
+              type="text"
+              value={expInput}
+              onChange={(e) => setExpInput(e.target.value)}
+              className="w-full border px-3 py-2 rounded-md"
+              placeholder="e.g. 1 year frontend dev OR Fresher"
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                onClick={() => setShowExpModal(false)}
+                className="px-3 py-1 border rounded-md"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleAddExperience}
+                className="bg-green-500 text-white px-4 py-1 rounded-md"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
