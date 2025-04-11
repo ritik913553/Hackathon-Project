@@ -9,9 +9,7 @@ export interface IProfile extends Document {
   interests: string[];
   isMentor: boolean;
   description: string;
-  likesInComments: number;
-  likesInPosts: number;
-  likesInProjects: number;
+ 
 }
 
 // Define the Profile schema
@@ -24,9 +22,7 @@ const ProfileSchema: Schema = new Schema(
     interests: { type: [String], default: [] },
     isMentor: { type: Boolean, default: false },
     description: { type: String, default: '' },
-    likesInComments: { type: Number, default: 0 },
-    likesInPosts: { type: Number, default: 0 },
-    likesInProjects: { type: Number, default: 0 },
+    
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields

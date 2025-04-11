@@ -1,27 +1,28 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 
-// Define the User interface
 export interface IUser extends Document {
   name: string;
   email: string;
   password: string;
-  isVerified:boolean
- 
+  isVerified: boolean;
+  profile: Types.ObjectId;
 }
 
-// Define the User schema
 const UserSchema: Schema = new Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    isVerified:{type:Boolean,default:false}
-    
+    isVerified: { type: Boolean, default: false },
+    profile: {
+      type: Schema.Types.ObjectId,
+      ref: "Profile",
+      required: false
+    }
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true,
   }
 );
 
-// Export the User model
 export default mongoose.model<IUser>('User', UserSchema);
