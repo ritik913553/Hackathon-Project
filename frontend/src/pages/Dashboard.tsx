@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import TopNav from '../components/TopNav';
 import PostSection from '../components/PostSection';
+import FindGroups from './FindGroups';
+import MentorSearch from './MentorSearch';
 
 export default function Dashboard() {
   const [activeView, setActiveView] = useState('posts');
@@ -9,9 +11,9 @@ export default function Dashboard() {
   const renderActiveView = () => {
     switch (activeView) {
       case 'myGroups':
-        return <div>My Groups Content</div>;
+        return <div><FindGroups/></div>;
       case 'findMentors':
-        return <div>Find Mentors Content</div>;
+        return <div><MentorSearch/></div>;
       case 'becomeMentor':
         return <div>Become Mentor Content</div>;
       case 'findProject':
