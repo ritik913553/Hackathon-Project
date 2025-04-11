@@ -1,5 +1,6 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { IProject } from './project.model'; // Import the Project interface
+import mongoose, { Schema, Document } from "mongoose";
 
 // Define the Profile interface
 export interface IProfile extends Document {
@@ -17,11 +18,14 @@ const ProfileSchema: Schema = new Schema(
   {
     profileImage: { type: String, default: '' },
     projects: [{ type: Schema.Types.ObjectId, ref: 'Project', default: [] }], // Reference to Project model
+    profileImage: { type: String, default: "" },
+    projects: { type: [String], default: [] },
     skills: { type: [String], default: [] },
-    experience: { type: String, default: '' },
+    experience: { type: [String], default: "" },
     interests: { type: [String], default: [] },
     isMentor: { type: Boolean, default: false },
     description: { type: String, default: '' },
+    description: { type: String, default: "" },
   },
   {
     timestamps: true, // Automatically adds createdAt and updatedAt fields
@@ -29,4 +33,4 @@ const ProfileSchema: Schema = new Schema(
 );
 
 // Export the Profile model
-export default mongoose.model<IProfile>('Profile', ProfileSchema);
+export default mongoose.model<IProfile>("Profile", ProfileSchema);
