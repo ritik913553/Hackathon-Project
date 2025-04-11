@@ -16,15 +16,15 @@ async function updateProfile(req: Request, res: Response, next: NextFunction) {
 
   const result = await updateUserProfile(userId, profileData);
 
-  if (!result.success) {
+  if (!result?.success) {
     // If update failed
-    throw new ApiResponse(400,{}, result.message);
+    throw new ApiResponse(400,{}, result?.message);
   }
 
   // If successful, return structured response
   return res
     .status(200)
-    .json(new ApiResponse(200, result.data, "Profile updated successfully"));
+    .json(new ApiResponse(200, result?.data, "Profile updated successfully"));
 }
 
 const updateProfileController = asyncHandler(updateProfile);
