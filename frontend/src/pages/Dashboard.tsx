@@ -42,6 +42,7 @@ export default function Dashboard() {
         <main className="flex-1 overflow-y-auto bg-gray-100 p-4">
           {renderActiveView()}
         </main>
+        
       </div>
     </div>
   );

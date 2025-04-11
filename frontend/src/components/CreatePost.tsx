@@ -1,3 +1,5 @@
+import Rightbar from "./Rightbar";
+
 export default function CreatePost() {
   return (
     <div className="flex">
@@ -46,6 +48,8 @@ export default function CreatePost() {
           </button>
         </div>
       </div>
+
+      {/* <Rightbar setActiveView={setActiveView} /> */}
     </div>
   );
 }
