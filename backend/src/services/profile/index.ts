@@ -31,7 +31,17 @@ export const updateUserProfile = async (
   data: z.infer<typeof profileValidation>
 ) => {
   try {
-    const user = await getUserById(userId);
+    const { success, data, message } = await getUserById(userId);
+
+    if (!success) {
+      return {
+        success,
+        message,
+      };
+    }
+
+    
+
   } catch (error) {
     console.error(error);
     return {
