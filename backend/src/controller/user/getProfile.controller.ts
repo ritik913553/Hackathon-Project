@@ -5,12 +5,12 @@ import ApiResponse from "../../utils/ApiResponse";
 import { getUserProfile } from "../../services/profile";
 
 async function getProfile(req: Request, res: Response, next: NextFunction) {
-    const userId = req.user?.id;
+    const userId = req.user?._id;
 
     
   if (!userId) {
     // If user is not authenticated
-    throw new ApiError(401, "Unauthorized: No user found in request");
+    throw new ApiResponse(401, "Unauthorized: No user found in request");
   }
 
   const result = await getUserProfile(userId);

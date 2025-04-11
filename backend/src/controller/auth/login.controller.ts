@@ -29,7 +29,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
   const result = await getUserByEmail(data.email);
 
   if (!result.success) {
-    res.status(403).json(new ApiResponse(403, "User does not exist"));
+    res.status(403).json(new ApiResponse(403,{}, "User does not exist"));
     return;
   }
 
@@ -39,7 +39,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
   );
 
   if (!isValidPass) {
-    res.status(403).json(new ApiResponse(403, "Invalid Password"));
+    res.status(403).json(new ApiResponse(403,{}, "Invalid Password"));
     return;
   }
 
@@ -54,7 +54,7 @@ async function login(req: Request, res: Response, next: NextFunction) {
   const secret = process.env.JWT_SECRET;
 
   if (!secret) {
-    res.status(403).json(new ApiResponse(403, "Invalid Jwt secret"));
+    res.status(403).json(new ApiResponse(403,{}, "Invalid Jwt secret"));
     return;
   }
 

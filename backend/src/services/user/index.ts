@@ -53,6 +53,7 @@ export const createUser = async (data: z.infer<typeof registerValidation>) => {
       email: data.email,
       name: data.name,
       password: hashPass(data.password),
+      
     });
 
     return {
