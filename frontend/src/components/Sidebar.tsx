@@ -50,9 +50,9 @@ export default function Sidebar({ activeView, setActiveView }: SidebarProps) {
 
         <ActionButton
           active={false}
-          onClick={() => console.log("Settings clicked")}
+          onClick={() => setActiveView("resources")}
           icon="⚙️"
-          label="Settings"
+          label="Resources"
         />
 
         <ActionButton

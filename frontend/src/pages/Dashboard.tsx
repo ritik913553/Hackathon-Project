@@ -6,6 +6,7 @@ import MentorSearch from './MentorSearch';
 import BecomeMentor from './BecomeMentor';
 import CreatePost from '../components/CreatePost';
 import FindProject from './FindProject';
+import ResourcesSection from './Resources';
 
 export default function Dashboard() {
   const [activeView, setActiveView] = useState<string>(''); // empty string = show "CreatePost"
@@ -20,6 +21,8 @@ export default function Dashboard() {
         return <BecomeMentor />;
       case 'findProject':
         return <FindProject/>;
+      case 'resources':
+        return <ResourcesSection/>;
       default:
         return <CreatePost />;
     }
