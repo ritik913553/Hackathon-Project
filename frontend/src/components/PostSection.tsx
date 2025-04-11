@@ -1,5 +1,5 @@
 import CreatePost from './CreatePost';
-import Post from './Post';
+// import Post from './Post';
 
 export default function PostSection() {
   // This would come from your API/state in a real app
@@ -28,9 +28,9 @@ export default function PostSection() {
     <div className="space-y-6">
       <CreatePost />
       <div className="space-y-4">
-        {posts.map(post => (
-          <Post key={post.id} post={post} />
-        ))}
+        {/* {posts.map(post => (
+          // <Post key={post.id} post={post} />
+        ))} */}
       </div>
     </div>
   );
