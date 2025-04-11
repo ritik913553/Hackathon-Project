@@ -7,7 +7,7 @@ export const getAllPosts = async () => {
         const posts = await Post.find();
         return {
             success: true,
-            posts,
+            data:posts,
         };
     } catch (error) {
         return {
@@ -29,7 +29,7 @@ export const getPostById = async (postId: string) => {
         }
         return {
             success: true,
-            post,
+            data:post,
         };
     } catch (error) {
         return {
@@ -51,7 +51,7 @@ export const getAllPostsOfUser = async (userId: string) => {
         }
         return {
             success: true,
-            posts,
+            data:posts,
         };
     } catch (error) {
         return {

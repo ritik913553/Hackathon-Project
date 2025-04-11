@@ -1,7 +1,7 @@
 import Profile from '../../model/profile.model';
 
 // Get user profile by userId
-export const getUserProfile = async (userId:String) => {
+export const getUserProfile = async (userId:string) => {
     try {
         const profile = await Profile.findOne({ _id: userId });
         if (!profile) {
@@ -12,7 +12,7 @@ export const getUserProfile = async (userId:String) => {
         }
         return {
             success: true,
-            profile,
+            data:profile,
         };
     } catch (error) {
         return {

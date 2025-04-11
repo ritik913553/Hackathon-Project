@@ -10,7 +10,7 @@ export const getUserByEmail = async (email: string) => {
         }
         return {
             success: true,
-            user,
+            data:user,
         };
     } catch (error) {
         return {
